@@ -1,7 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
-import { Index } from './components/accountBox';
 import styled from "styled-components";
+import { Index } from './components/accountBox';
 
 const AppContainer = styled.div`
   width: 100%;

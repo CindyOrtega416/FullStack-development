@@ -75,7 +75,7 @@ export const Input = styled.input`
   height: 42px;
   outline: none;
   border: 1px solid rgba(200, 200, 200, 0.3);
-  padding: 0px ;
+  padding: 0px 10px;
   border-bottom: 1.4px solid transparent;
   transition: all 200ms ease-in-out;
   font-size: 12px;
