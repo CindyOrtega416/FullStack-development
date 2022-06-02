@@ -22,42 +22,42 @@ import MapComp from "./MapTest";
 
 function App() {
 
-  return (
-              <Container className="d-flex align-items-center justify-content-center"
-              style={{ minHeight: "100vh"}}>
+    return (
+        <Container className="d-flex align-items-center justify-content-center"
+                   style={{ minHeight: "100vh"}}>
 
-                  <div className="w-100" style={{ maxWidth: '400px'}}>
-                    <Router>
-                        <AuthProvider>
-                            <Switch>
-                                <Route path="/signup" exact>
-                                    <Signup />
-                                </Route>
-                                <Route path="/" exact>
-                                    <Login />
-                                </Route>
-                                <Route path="/report" exact>
-                                    <ReportForm />
-                                </Route>
-                                <Route path="/forgot-password" exact>
-                                    <ForgotPassword />
-                                </Route>
-                                <Route path="/database" exact>
-                                    <Database />
-                                </Route>
-                                <Route path="/map" exact>
-                                    <MapComp />
-                                </Route>
-                                <Route path="/register" exact>
-                                    <Register />
-                                </Route>
-                            </Switch>
-                        </AuthProvider>
-                    </Router>
-                  </div>
-              </Container>
+            <div className="w-100" style={{ maxWidth: '1000px'}} >
+                <Router>
+                    <AuthProvider>
+                        <Switch>
+                            <Route path="/signup" exact>
+                                <Signup />
+                            </Route>
+                            <Route path="/" exact>
+                                <Login />
+                            </Route>
+                            <Route path="/report" exact>
+                                <ReportForm />
+                            </Route>
+                            <Route path="/forgot-password" exact>
+                                <ForgotPassword />
+                            </Route>
+                            <Route path="/database" exact>
+                                <Database />
+                            </Route>
+                            <Route path="/map" exact>
+                                <MapComp />
+                            </Route>
+                            <Route path="/register" exact>
+                                <Register />
+                            </Route>
+                        </Switch>
+                    </AuthProvider>
+                </Router>
+            </div>
+        </Container>
 
-  );
+    );
 }
 
 export default App;

@@ -39,8 +39,8 @@
   border-radius:19px;
   box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
   padding-right: 550px;
-  margin-left: -28.33%;
-  margin-right: -33.33%;
+  display: flex;
+  margin-left: 15.68vw;
 
 
 }
@@ -51,9 +51,18 @@
   font-size: 40px;
   font-weight: 600;
   padding: 30px 5% ;
-  margin-left: -28.33%;
-  margin-right: -33.33%;
-  margin-top: -110.33%;
+  margin-top: -45.33%;
+}
+
+
+.colorb{
+  background-color: #095E3D;
+  border-radius:12px;
+  border: 2px solid #095E3D;
+  box-shadow:0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  color:#ffffff;
+  width: 100%;
+  height: 40px;
 }
 
 

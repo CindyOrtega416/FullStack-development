@@ -176,7 +176,7 @@ function MapPicker() {
 
     return (
         <div>
-
+            <h2 className="headerLogo">Segurita</h2>
             <div className="MapPicker">
                 <Map ref={mapRef} center={[-31.4167, -64.18]} zoom={13}>
                     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors" />
@@ -210,19 +210,19 @@ function MapPicker() {
 
                 </Map>
             </div>
-            <div style={{  marginTop: "-170%",
-                marginLeft: "-110%", borderRadius:"19px",
-                boxShadow: "0 0 2px rgba(15, 15, 15, 0.28)", background:"#EBEBF3",  padding: "30px 5% "}}>
+            <div className="report" style={{  marginTop: "-70%", marginRight:"-70%", borderRadius:"19px",
+                boxShadow: "0 0 2px rgba(15, 15, 15, 0.28)", background:"#EBEBF3",  padding: "1.56vW 5% ", width:"100%"
+                }}>
 
                 <p style={{
-                    fontWeight: "900", fontSize: "20px"}}>Denuncias</p>
+                    fontWeight: "900", fontSize: "20px", textAlign:"left"}}>Denuncias</p>
                 {
                     storeData.map(x => {
                         return (
                             <div>
 
                                     <ul style={{  textAlign:"left"}}>
-                                        <li >
+                                        <li>
                                             {x.issue}<br/>
                                         </li>
                                     </ul>

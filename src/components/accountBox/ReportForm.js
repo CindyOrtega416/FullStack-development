@@ -10,14 +10,13 @@ class ReportForm extends Component {
 
     render() {
         return (
-                <section className="clean-block clean-form dark">
-                    <h2 className="headerLogo">Segurita</h2>
+
                     <div className="container">
-                    </div>
+
                             <div className="mb-3">
                                 <MapPicker />
                             </div>
-                </section>
+    </div>
         );
     }
 }
