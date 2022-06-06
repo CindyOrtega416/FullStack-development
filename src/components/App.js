@@ -6,16 +6,16 @@ import {
 } from "react-router-dom";
 import ReportForm from "./accountBox/ReportForm";
 import {AuthProvider} from "../contexts/AuthContext";
-import Signup from "./Signup";
+import Signup from "./authentication/Signup";
 import { Container } from 'react-bootstrap';
-import Login from "./Login";
-import ForgotPassword from "./ForgotPassword";
+import Login from "./authentication/Login";
+import ForgotPassword from "./authentication/ForgotPassword";
 import {useEffect, useState} from "react";
 import {collection, getDocs} from "@firebase/firestore";
 import {db} from "../firebase";
 import Database from "./database";
 import MapTest from "./MapTest";
-import Register from "./Register"
+import Register from "./authentication/Register"
 import MapComp from "./MapTest";
 
 

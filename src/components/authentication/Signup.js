@@ -1,11 +1,11 @@
 import React, {useEffect, useRef, useState} from "react";
 import { Form, Button, Card, Alert } from 'react-bootstrap'
-import {useAuth} from "../contexts/AuthContext";
+import {useAuth} from "../../contexts/AuthContext";
 import { Link, useHistory } from 'react-router-dom';
 import {addDoc, collection, GeoPoint} from "@firebase/firestore";
-import {db} from "../firebase";
+import {db} from "../../firebase";
 import firebase from "firebase/compat";
-import logo from '../images/logo.jpg'
+import logo from '../../images/logo.jpg'
 import  {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -13,6 +13,10 @@ export default function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
+    const dniRef = useRef()
+    const phone_numberRef = useRef()
+    const nameRef = useRef()
+
     const { signup } = useAuth()  //para poder usar en el form lo que creamos en AuthContext
     const [error, setError] = useState('') //vacio porque no va a tener un error por default
     const [success, setSuccess] = useState('')
@@ -28,16 +32,7 @@ export default function Signup() {
     const usersCollectionRef = collection(db, "registeredUsers")
 
 
-    const createRegisteredUsers = () =>{
-        const registeredUsersRef = firebase.database().ref('registeredUsers/')
-        const regisUsers = {
-            dni: newDni,
-            phone_number: newPhone,
-            name: newName
-        };
-        registeredUsersRef.push(regisUsers);
 
-    }
 
 
 
@@ -50,18 +45,46 @@ export default function Signup() {
     }
 */
 
+
     async function handleSubmit(e) {
         e.preventDefault() //prevent our form to refresh
 
-        if(passwordRef.current.value !==
+        let phone_numberArr = []
+        phone_numberArr.push(phone_numberRef.current.value)
+        console.log()
+
+
+        if(passwordRef.current.value.length <= 6){
+            return [setError('Las contraseñas deben tener más de 6 caracteres'), setInfo(false)]
+        } else if(passwordRef.current.value !==
             passwordConfirmRef.current.value) {
             return [setError('Las contraseñas no coinciden'), setInfo(false)]
+
+        } else if(phone_numberArr[0][0]  !== '+'
+            || phone_numberArr[0][1]  !== '5'
+            || phone_numberArr[0][2]  !== '4'
+            || phone_numberArr[0][3]  !== '9'
+            || phone_numberArr[0][4]  !== '3'
+            || phone_numberArr[0][5]  !== '5'
+            || phone_numberArr[0][6]  !== '1') {
+            return [setError('El número de telefono debe tener el siguiente formato: +549351...'), setInfo(false)]
+
         }
 
         try {
             setError('') //antes de intentar cualquier cosa queremos resetear el mensaje de error
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
+
+            const registeredUsersRef = await firebase.database().ref('registeredUsers/')
+            const regisUsers = {
+                    dni: dniRef.current.value,
+                    phone_number: phone_numberRef.current.value,
+                    name: nameRef.current.value
+                };
+            registeredUsersRef.push(regisUsers);
+
+
             return [setSuccess('La cuenta ha sido creada con éxito'), setInfo(false)]
 /*            setTimeout(() => {
                 history.push("/")
@@ -70,10 +93,11 @@ export default function Signup() {
 
         } catch(error) {
             console.log(error)
-            return [setError('La cuenta que intenta crear ya existe'), setInfo(false)]
+                return [setError('Ha ocurrido un error al crear la cuenta. Por favor, intente de nuevo'), setInfo(false)]
         }
 
     }
+
     return (
 
         <section class="vh-100" style={{backgroundColor:" white"}}>
@@ -94,21 +118,15 @@ export default function Signup() {
                                         <Form onSubmit={handleSubmit}>
                                             <Form.Group id="dni">
                                                 <Form.Label>DNI</Form.Label>
-                                                <Form.Control type="text" onChange={(event) => {
-                                                    setNewDni(event.target.value);
-                                                }}/>
+                                                <Form.Control type="text" ref={dniRef} required/>
                                             </Form.Group>
                                             <Form.Group id="phone" >
                                                 <Form.Label>Número de teléfono</Form.Label>
-                                                <Form.Control type="text" onChange={(event) => {
-                                                    setNewPhone(event.target.value);
-                                                }}/>
+                                                <Form.Control type="text" ref={phone_numberRef} required/>
                                             </Form.Group>
                                             <Form.Group id="name" >
                                                 <Form.Label>Nombre</Form.Label>
-                                                <Form.Control type="text" onChange={(event) => {
-                                                    setNewName(event.target.value);
-                                                }}/>
+                                                <Form.Control type="text" ref={nameRef} required/>
                                             </Form.Group>
                                             <Form.Group id="email">
                                                 <Form.Label>Email</Form.Label>
@@ -118,8 +136,12 @@ export default function Signup() {
                                                 <Form.Label>Contraseña</Form.Label>
                                                 <Form.Control type="password" ref={passwordRef} required />
                                             </Form.Group>
+                                            <Form.Group id="password-confirm">
+                                                <Form.Label>Repetir contraseña</Form.Label>
+                                                <Form.Control type="password" ref={passwordConfirmRef} required />
+                                            </Form.Group>
                                             <p>     </p>
-                                            <button class="colorb" disabled={loading} type="submit" onClick={createRegisteredUsers}>
+                                            <button class="colorb" disabled={loading} type="submit" onClick={handleSubmit}>
                                                 Registrarse
                                             </button>
                                         </Form>
