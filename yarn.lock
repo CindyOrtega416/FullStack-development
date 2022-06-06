@@ -2444,6 +2444,21 @@
     "@types/estree" "*"
     "@types/json-schema" "*"
 
+"@types/esri-leaflet-geocoder@^2.2.3":
+  "integrity" "sha512-SyJuRZlPARrPWwx7L5KrvKLNZcbyw4CuCzyj7e3kgo7MZFpFCkGpO7Po5J6kvZt+OdT138u3WpXRVnRNNrSeRQ=="
+  "resolved" "https://registry.npmjs.org/@types/esri-leaflet-geocoder/-/esri-leaflet-geocoder-2.2.3.tgz"
+  "version" "2.2.3"
+  dependencies:
+    "@types/esri-leaflet" "*"
+    "@types/leaflet" "*"
+
+"@types/esri-leaflet@*":
+  "integrity" "sha512-Z3GLyJTepEsEpo2FB3eRqSRxGw1Y2Vohpuu5Qp87tc3MGbXjhSUTRYldoaACZj6JQQJuOnyK9FLMdSziq5C1Ow=="
+  "resolved" "https://registry.npmjs.org/@types/esri-leaflet/-/esri-leaflet-2.1.9.tgz"
+  "version" "2.1.9"
+  dependencies:
+    "@types/leaflet" "*"
+
 "@types/estree@*":
   "integrity" "sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ=="
   "resolved" "https://registry.npmjs.org/@types/estree/-/estree-0.0.51.tgz"
@@ -2453,6 +2468,11 @@
   "integrity" "sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw=="
   "resolved" "https://registry.npmjs.org/@types/estree/-/estree-0.0.39.tgz"
   "version" "0.0.39"
+
+"@types/geojson@*":
+  "integrity" "sha512-1rkryxURpr6aWP7R786/UQOkJ3PcpQiWkAXBmdWc7ryFWqN6a4xfK7BtjXvFBKO9LjQ+MWQSWxYeZX1OApnArA=="
+  "resolved" "https://registry.npmjs.org/@types/geojson/-/geojson-7946.0.8.tgz"
+  "version" "7946.0.8"
 
 "@types/glob@^7.1.1":
   "integrity" "sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA=="
@@ -2515,6 +2535,13 @@
   "integrity" "sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ=="
   "resolved" "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   "version" "0.0.29"
+
+"@types/leaflet@*":
+  "integrity" "sha512-RzK5BYwYboOXXxyF01tp8g1J8UbdRvoaf+F/jCnVaWC42+QITB6wKvUklcX7jCMRWkzTnGO9NLg7A6SzrlGALA=="
+  "resolved" "https://registry.npmjs.org/@types/leaflet/-/leaflet-1.7.10.tgz"
+  "version" "1.7.10"
+  dependencies:
+    "@types/geojson" "*"
 
 "@types/long@^4.0.1":
   "integrity" "sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA=="

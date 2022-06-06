@@ -40,7 +40,7 @@ function MapPicker() {
         const { leafletElement: map } = current;
 
         if ( !map ) return;
-
+        
 
 
 
@@ -151,6 +151,7 @@ function MapPicker() {
 
     }, [])
 
+    
     useEffect(() => {
         const fetchData = () => {
             let tmp = []
@@ -160,6 +161,7 @@ function MapPicker() {
                         tmp.push(doc.val())
                     })
                 setStoreData(tmp);
+            
                    /* setLocations(locations)
                     console.log(locations)*/
 
@@ -169,9 +171,26 @@ function MapPicker() {
      */
                 })
         }
+        
         fetchData()
 
     }, [])
+
+    function handleOnFlyTo() {
+
+            const { current = {} } = mapRef;
+            const { leafletElement: map } = current;
+    
+            if ( !map ) return;
+
+            storeData.map(x => {
+                 map.flyTo([x.address.lat, x.address.lon], 14, { 
+                    essential: true, 
+                    duration :2})
+            })
+       
+    }
+
 
 
     return (
@@ -195,7 +214,7 @@ function MapPicker() {
                                 return (
                                     <Marker position={[x.address.lat, x.address.lon]}>
                                         <Popup>
-                                            <h5>{x.issue}</h5>
+                                        <h5>{x.issue}</h5>
                                             <img
                                                 src={x.img}
                                                 width="150px"
@@ -223,7 +242,8 @@ function MapPicker() {
 
                                     <ul style={{  textAlign:"left"}}>
                                         <li>
-                                            {x.issue}<br/>
+                                            <button onClick={handleOnFlyTo}> {x.issue}<br/></button>
+                                           
                                         </li>
                                     </ul>
 
