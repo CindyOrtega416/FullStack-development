@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import L from 'leaflet';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import '../../App.css';
 import 'leaflet/dist/leaflet.css';
 
@@ -11,6 +11,7 @@ import firebase from "firebase/compat";
 import * as ELG from "esri-leaflet-geocoder";
 import {Button} from "bootstrap";
 import Link from "@material-ui/core/Link";
+import Report from './Report';
 
 //delete L.Icon.Default.prototype._getIconUrl;
 
@@ -28,11 +29,6 @@ L.Icon.Default.mergeOptions({
 function MapPicker() {
 
     const [storeData, setStoreData] = useState([]);
-
-
-
-
-
     const mapRef = useRef();
 
     useEffect(() => {
@@ -41,8 +37,6 @@ function MapPicker() {
 
         if ( !map ) return;
         
-
-
 
       //  L.marker([50.5, 30.5], []).addTo(map);
 /*        export function createMarker(latitude,longitude,popupContent){
@@ -161,7 +155,6 @@ function MapPicker() {
                         tmp.push(doc.val())
                     })
                 setStoreData(tmp);
-            
                    /* setLocations(locations)
                     console.log(locations)*/
 
@@ -175,21 +168,72 @@ function MapPicker() {
         fetchData()
 
     }, [])
+   
+    const handleOnFlyTo = () => {
 
-    function handleOnFlyTo() {
-
-            const { current = {} } = mapRef;
+           const { current = {} } = mapRef;
             const { leafletElement: map } = current;
     
-            if ( !map ) return;
+            if ( !map ) return
+ let coordinates = []
 
-            storeData.map(x => {
-                 map.flyTo([x.address.lat, x.address.lon], 14, { 
+
+             storeData.map(x => {
+                 
+                coordinates.push([x.address.lat, x.address.lon])
+                console.log(coordinates)
+                    })
+                    map.setView([coordinates], 16, { 
+                        duration :2})
+                    
+            
+            /* 
+           console.log(e)
+
+            let flyMarker = []
+                    for (let i = 0; i < flyMarker.length; i++) {
+                        map.setView([flyMarker[i][0], flyMarker[i][1]], 16, { 
+                            essential: true, 
+                            duration :2})
+                        
+                    }
+                    flyMarker.filter(obj => {
+                        console.log(obj)
+                    })
+                    console.log(flyMarker)
+                    */
+                    /*
+        const { lat, lng } = e.latlng;
+        console.log(lat, lng);*/
+
+           /* storeData.map(x=> {
+                 marker.on('click', function(e){
+                map.setView(e.latlng, 13);
+            });
+            })*/
+
+          /*  storeData.map(x => {
+                let denuncias = []
+                denuncias.push([x.address.lat, x.address.lon])
+                console.log(denuncias)
+                    map.flyTo([x.address.lat, x.address.lon], 14, { 
                     essential: true, 
                     duration :2})
-            })
-       
-    }
+                })  */
+           
+    }/*
+    handleClick = (e) => {
+        const { lat, lng } = e.latlng;
+        console.log(lat, lng);
+      } */
+  /*  flyMarker.push([x.address.lat, x.address.lon])
+    console.log(flyMarker)
+
+    for(let i=0; i<flyMarker.length; i++) {
+        map.flyTo([flyMarker[i][0], flyMarker[i][1]], 14, { 
+        essential: true, 
+        duration :2})
+    }*/
 
 
 
@@ -201,18 +245,22 @@ function MapPicker() {
                     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors" />
                     {
                         storeData.map(x => {
+                            
                             console.log([x.issue, x.address.lat, x.address.lon, x.img])
                             if (!x.img){
                             return (
-                                <Marker position={[x.address.lat, x.address.lon]}>
+                                <Marker id={x.id}position={[x.address.lat, x.address.lon]}
+                                onClick={handleOnFlyTo}>
                                     <Popup>
                                         <p>{x.issue}</p>
                                     </Popup>
                                 </Marker>
+                                
 
                         )} else {
                                 return (
-                                    <Marker position={[x.address.lat, x.address.lon]}>
+                                    <Marker position={[x.address.lat, x.address.lon]}
+                                    onClick={handleOnFlyTo}>
                                         <Popup>
                                         <h5>{x.issue}</h5>
                                             <img
@@ -222,6 +270,7 @@ function MapPicker() {
                                             />
                                         </Popup>
                                     </Marker>
+                                    
                                 )
                             }
                         })
@@ -229,30 +278,16 @@ function MapPicker() {
 
                 </Map>
             </div>
-            <div className="report" style={{  marginTop: "-70%", marginRight:"-70%", borderRadius:"19px",
-                boxShadow: "0 0 2px rgba(15, 15, 15, 0.28)", background:"#EBEBF3",  padding: "1.56vW 5% ", width:"100%"
-                }}>
+           
 
                 <p style={{
                     fontWeight: "900", fontSize: "20px", textAlign:"left"}}>Denuncias</p>
-                {
-                    storeData.map(x => {
-                        return (
-                            <div>
-
-                                    <ul style={{  textAlign:"left"}}>
-                                        <li>
-                                            <button onClick={handleOnFlyTo}> {x.issue}<br/></button>
-                                           
-                                        </li>
-                                    </ul>
-
-                            </div>
-                        )
-                    })
+                {   
+                
+                    storeData.map(x => <Report data={x}/>)
                 }
             </div>
-        </div>
+    
     );
 }
 
