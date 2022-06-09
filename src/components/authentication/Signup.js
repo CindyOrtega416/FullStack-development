@@ -40,7 +40,6 @@ export default function Signup() {
         await addDoc(usersCollectionRef, {dni: newDni,
             phone_number: newPhone,
             name: newName
-
         })
     }
 */
@@ -78,35 +77,35 @@ export default function Signup() {
 
             const registeredUsersRef = await firebase.database().ref('registeredUsers/')
             const regisUsers = {
-                    dni: dniRef.current.value,
-                    phone_number: phone_numberRef.current.value,
-                    name: nameRef.current.value
-                };
+                dni: dniRef.current.value,
+                phone_number: phone_numberRef.current.value,
+                name: nameRef.current.value
+            };
             registeredUsersRef.push(regisUsers);
 
 
             return [setSuccess('La cuenta ha sido creada con éxito'), setInfo(false)]
-/*            setTimeout(() => {
-                history.push("/")
-            }, 500)*/
+            /*            setTimeout(() => {
+                            history.push("/")
+                        }, 500)*/
             setLoading(false)
 
         } catch(error) {
             console.log(error)
-                return [setError('Ha ocurrido un error al crear la cuenta. Por favor, intente de nuevo'), setInfo(false)]
+            return [setError('Ha ocurrido un error al crear la cuenta. Por favor, intente de nuevo'), setInfo(false)]
         }
 
     }
 
     return (
 
-        <section class="vh-100" style={{backgroundColor:" white"}}>
-            <div class="container py-5 h-100">
+        <section class="vh-100 d-flex align-items-center justify-content-center" style={{backgroundColor:" white", minHeight: "100vh"}}>
+            <div class="container py-5 h-100 w-100" style={{ maxWidth: '1000px'}} >
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col col-xl-10">
                         <div class="card" style={{borderRadius: "1rem",  boxShadow:" 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)"}}>
                             <div class="row g-0">
-                                <div class="col-md-6 col-lg-5 d-none d-md-block" style={{backgroundColor: "#095E3D",borderRadius:" 1rem 0 0 1rem"}}>
+                                <div class="col-md-6 col-lg-5 d-none d-md-block" style={{backgroundColor: "#77C4EE",borderRadius:" 1rem 0 0 1rem"}}>
                                     <img src={logo} alt="login form" class="img-fluid" style={{borderRadius:" 1rem 0 0 1rem", marginTop:"50%"}} />
                                 </div>
                                 <div class="col-md-6 col-lg-7 d-flex align-items-center">
