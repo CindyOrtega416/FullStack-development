@@ -1,11 +1,11 @@
 import React, {useEffect, useRef, useState} from "react";
 import { Form, Button, Card, Alert } from 'react-bootstrap'
-import {useAuth} from "../../contexts/AuthContext";
+import {useAuth} from "../contexts/AuthContext";
 import { Link, useHistory } from 'react-router-dom';
 import {addDoc, collection, GeoPoint} from "@firebase/firestore";
-import {db} from "../../firebase";
+import {db} from "../Config/firebase";
 import firebase from "firebase/compat";
-import logo from '../../images/logo.jpg'
+import logo from '../images/logo.jpg'
 import  {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -48,10 +48,6 @@ export default function Signup() {
     async function handleSubmit(e) {
         e.preventDefault() //prevent our form to refresh
 
-        let phone_numberArr = []
-        phone_numberArr.push(phone_numberRef.current.value)
-        console.log()
-
 
         if(passwordRef.current.value.length <= 6){
             return [setError('Las contraseñas deben tener más de 6 caracteres'), setInfo(false)]
@@ -59,17 +55,7 @@ export default function Signup() {
             passwordConfirmRef.current.value) {
             return [setError('Las contraseñas no coinciden'), setInfo(false)]
 
-        } else if(phone_numberArr[0][0]  !== '+'
-            || phone_numberArr[0][1]  !== '5'
-            || phone_numberArr[0][2]  !== '4'
-            || phone_numberArr[0][3]  !== '9'
-            || phone_numberArr[0][4]  !== '3'
-            || phone_numberArr[0][5]  !== '5'
-            || phone_numberArr[0][6]  !== '1') {
-            return [setError('El número de telefono debe tener el siguiente formato: +549351...'), setInfo(false)]
-
         }
-
         try {
             setError('') //antes de intentar cualquier cosa queremos resetear el mensaje de error
             setLoading(true)
@@ -77,8 +63,6 @@ export default function Signup() {
 
             const registeredUsersRef = await firebase.database().ref('registeredUsers/')
             const regisUsers = {
-                dni: dniRef.current.value,
-                phone_number: phone_numberRef.current.value,
                 name: nameRef.current.value
             };
             registeredUsersRef.push(regisUsers);
@@ -115,14 +99,6 @@ export default function Signup() {
                                         {error && <Alert variant="danger">{error}</Alert>}
                                         {success && <Alert variant="success">{success}</Alert>}
                                         <Form onSubmit={handleSubmit}>
-                                            <Form.Group id="dni">
-                                                <Form.Label>DNI</Form.Label>
-                                                <Form.Control type="text" ref={dniRef} required/>
-                                            </Form.Group>
-                                            <Form.Group id="phone" >
-                                                <Form.Label>Número de teléfono</Form.Label>
-                                                <Form.Control type="text" ref={phone_numberRef} required/>
-                                            </Form.Group>
                                             <Form.Group id="name" >
                                                 <Form.Label>Nombre</Form.Label>
                                                 <Form.Control type="text" ref={nameRef} required/>

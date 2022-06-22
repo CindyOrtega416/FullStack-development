@@ -1,11 +1,11 @@
 import React, {useEffect, useRef, useState} from "react";
 import { Form, Button, Card, Alert } from 'react-bootstrap'
-import {useAuth} from "../../contexts/AuthContext";
+import {useAuth} from "../contexts/AuthContext";
 import { Link, useHistory } from 'react-router-dom';
 import {addDoc, collection, GeoPoint} from "@firebase/firestore";
 
 import { toast } from "react-toastify"
-import reference from '../../firebase'
+import reference from '../Config/firebase'
 import firebase from "firebase/compat/app"
 import { getDatabase, ref, set } from "firebase/database";
 import 'firebase/compat/database'

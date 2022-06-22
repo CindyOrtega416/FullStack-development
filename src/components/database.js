@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {addDoc, collection, GeoPoint, getDocs} from "@firebase/firestore";
-import {db} from "../firebase";
+import {db} from "../Config/firebase";
 
 
 export default function Database () {
